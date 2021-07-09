@@ -45,7 +45,7 @@ int main(void)
         break;
     }
   }
-
+  USB_ReEnumerate();
   MX_USB_DEVICE_Init();
   
   while (1)
