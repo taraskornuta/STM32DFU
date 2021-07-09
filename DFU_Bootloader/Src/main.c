@@ -22,11 +22,11 @@ int main(void)
     switch(Boot_AppValidation())
     {
       case BOOT_STATUS_OK:
-        JumpAddress = *(__IO uint32_t *) (APP_MAIN_ADDR_START + 4);
+        JumpAddress = *(__IO uint32_t *) (MAP_MAIN_ADDR_START + 4);
         JumpToApplication = (pFunction) JumpAddress;
         HAL_DeInit();
         	/* Initialize user application's Stack Pointer */
-        __set_MSP(*(__IO uint32_t *) APP_MAIN_ADDR_START);
+        __set_MSP(*(__IO uint32_t *) MAP_MAIN_ADDR_START);
         JumpToApplication();
         break;
       
@@ -35,7 +35,7 @@ int main(void)
         break;
       
       case BOOT_STATUS_CRC:   // app corrupted
-        if ((BOOT_STATUS_OK == Boot_CopySection(APP_MAIN_ADDR_START, APP_OTA_ADDR_START, APP_OTA_REGION_PAGES)) && 
+        if ((BOOT_STATUS_OK == Boot_CopySection(MAP_MAIN_ADDR_START, MAP_OTA_ADDR_START, MAP_OTA_REGION_PAGES)) && 
             (BOOT_STATUS_OK == Boot_AppValidation()))              // recover fw from OTA partition, where the backup was stored during dfu update
         {
           NVIC_SystemReset();                                      // reboot if validation succes

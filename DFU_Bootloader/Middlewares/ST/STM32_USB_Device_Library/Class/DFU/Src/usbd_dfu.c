@@ -292,7 +292,7 @@ static uint8_t  USBD_DFU_Init(USBD_HandleTypeDef *pdev,
     hdfu = (USBD_DFU_HandleTypeDef *) pdev->pClassData;
 
     hdfu->alt_setting = 0U;
-    hdfu->data_ptr = APP_MAIN_ADDR_START;
+    hdfu->data_ptr = MAP_MAIN_ADDR_START;
     hdfu->wblock_num = 0U;
     hdfu->wlength = 0U;
 

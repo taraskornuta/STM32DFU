@@ -201,8 +201,8 @@ uint16_t MEM_If_Erase_FS(uint32_t Add)
   FLASH_EraseInitTypeDef eraseinitstruct;
   /* Get the number of sector to erase from 1st sector*/
   eraseinitstruct.TypeErase   = FLASH_TYPEERASE_PAGES;
-  eraseinitstruct.PageAddress = APP_OTA_ADDR_START;
-  eraseinitstruct.NbPages     = APP_OTA_REGION_PAGES;
+  eraseinitstruct.PageAddress = MAP_OTA_ADDR_START;
+  eraseinitstruct.NbPages     = MAP_OTA_REGION_PAGES;
   status = HAL_FLASHEx_Erase(&eraseinitstruct, &PageError);
   if (status != HAL_OK)
   {
@@ -229,10 +229,10 @@ uint16_t MEM_If_Write_FS(uint8_t *src, uint8_t *dest, uint32_t Len)
   {
     /* Device voltage range supposed to be [2.7V to 3.6V], the operation will
        be done by byte */ 
-    if(HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, (uint32_t)(APP_OTA_ADDR_START+pagesCount+i), *(uint32_t*)(src+i)) == HAL_OK)
+    if(HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, (uint32_t)(MAP_OTA_ADDR_START+pagesCount+i), *(uint32_t*)(src+i)) == HAL_OK)
     {
       //Check the written value
-      if(*(uint32_t *)(src + i) != *(uint32_t*)(APP_OTA_ADDR_START+pagesCount+i))
+      if(*(uint32_t *)(src + i) != *(uint32_t*)(MAP_OTA_ADDR_START+pagesCount+i))
       {
         /* Flash content doesn't match SRAM content */
         return 2;

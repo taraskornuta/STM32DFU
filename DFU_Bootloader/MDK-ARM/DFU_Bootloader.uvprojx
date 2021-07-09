@@ -443,6 +443,16 @@
               <FileType>1</FileType>
               <FilePath>..\Src\boot.c</FilePath>
             </File>
+            <File>
+              <FileName>fw_info.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\General\fw_info.h</FilePath>
+            </File>
+            <File>
+              <FileName>mapping_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\General\mapping_cfg.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

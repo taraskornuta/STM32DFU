@@ -31,10 +31,9 @@ args = parser.parse_args()
 def get_git_sha():
     stream = os.popen('git describe --tags --always')
     output = stream.read()
-    if output.find("fatal:"):
+    if "fatal:" in output:
         return 0
-    else:
-        return int(output)
+    return int(output.rstrip().encode(), 16)
 
 fw_data = 0
 fw_size = 0
@@ -51,7 +50,7 @@ VER_MINOR = version.minor
 VER_PATCH = version.micro
 BUILD_TIME = int(time.time())
 GIT_SHA    = get_git_sha()
-print("VERSION    : {:d}.{:d}.{:d}\nBUILD_TIME : {:d}\nGIT_SHA    : {:d}".format(VER_MAJOR, VER_MINOR, VER_PATCH, BUILD_TIME, GIT_SHA))
+print("VERSION    : {:d}.{:d}.{:d}\nBUILD_TIME : {:}\nGIT_SHA    : {:x}".format(VER_MAJOR, VER_MINOR, VER_PATCH, BUILD_TIME, GIT_SHA))
 
 fw_info_body = bytearray(struct.pack("BBBxIIxxxxxxxxxxxx", VER_MAJOR, VER_MINOR, VER_PATCH, BUILD_TIME, GIT_SHA))
 
